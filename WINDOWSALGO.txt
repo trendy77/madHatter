@@ -1,0 +1,4 @@
+powershell -ExecutionPolicy ByPass -File windows_trent.ps1 remove
+
+
+cd C:\Users\trend_uvf08d1\Dropbox\TalgoVPNca
