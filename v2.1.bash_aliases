@@ -1,10 +1,5 @@
 # spectreAliases
-## v2.1
-
-# su for non root user(s)
-alias apt='sudo apt'
-alias service='sudo service'
-alias iw='sudo iw'
+## v2.2
 
 # apt s/cuts
 alias up='apt-get update -y && apt-get --allow-unauthenticated upgrade -y && apt autoremove -y && apt clean'
@@ -13,12 +8,14 @@ alias in='apt-get install -y'
 # info/stats
 alias sup='service --status-all'
 alias resh='sudo service ssh restart'
+alias ip?='sudo /sbin/ifconfig'
+alias pids?='ps ax'
 
 # app s/cuts
 alias sc='screen'
 alias gogit='/home/root/Documents/blackHattery/kalit00ls/gitQG.sh nt'
 alias cln='cd /home/t/Documents/cl0nemast3r && python Cl0neMast3r.py'
-alias clnDir='cd /home/t/Documents/cl0nemast3r && ls -a' 
+alias clnDir='cd /home/t/Documents/cl0nemast3r && ls -a'
 
 # go2 dirs
 alias cd..='cd ..'
@@ -33,6 +30,6 @@ alias revSSH='gcloud compute ssh --zone us-west1-a tunnel -f -N -p 22 -D localho
 alias sshKhub='ssh -p 50001 root@t.2p.fm'
 alias sshPi='ssh -p 50001 root@pi.2p.fm'
 
-##### TO DO 
+##### TO DO
 ### WSL SECTION?
 ### BACKUP CMD?
