@@ -122,3 +122,7 @@ cheat-sheets/
 pkg/
 src/
 >>>>>>> parent of 66e4219... init move from kalit00ls / bash of Fortune
+
+\.history/
+
+*.cap

