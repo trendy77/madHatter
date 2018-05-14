@@ -1,6 +1,8 @@
 #! /bin/sh
 # PI REVERSE SSH TUNNEL
-	CNCIPADDRESS=35.186.169.125
+
+CLOUDIP=35.186.169.125
+
 # INSTALL ANY UPDATES &
 	apt-get update -y && apt-get upgrade -y && apt autoremove
 # INSTALL PRE-REQ APPS
@@ -45,17 +47,17 @@
 		[ssh] \
 		accept = 443 \
 		connect = 127.0.0.1:22"
-	cat $TEXT5 >> /etc/stunnel/stunnel.conf
+	printf $TEXT5 >> /etc/stunnel/stunnel.conf
 
 #STUNNEL AUTO STARTUP
-	cat $TEXT4 >> /etc/default/stunnel4
+	printf $TEXT4 >> /etc/default/stunnel4
 	
 # SET AUTOSSH TO LAUNCH AS SOON AS NETWORK UP.	
 	touch /etc/network/if-up.d/autossh 
 	chmod +x /etc/network/if-up.d/autossh 
 	TEXT6="#!/bin/sh \
 	su -c \"autossh -p 443 -f -N -R *:2222:localhost:22 [email protected] -o LogLevel=error -o UserKnownHostsFile=/dev/null -o\""
-	cat $TEXT6 >> /etc/network/if-up.d/autossh
+	printF $TEXT6 >> /etc/network/if-up.d/autossh
 
 # -p 443 	establish the SSH tunnel on port 443 which is our stunnel SSL-tunnel. the request to 443 will be forwarded to localhost:22. 
 # -f 		requests ssh to go to background mode 
