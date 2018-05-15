@@ -1,26 +1,23 @@
 # Handy Linux Commands
-## Specifically for light-Kali img for KaliPi
+#### Specifically for light-Kali img for KaliPi
 
-#### set the DNS servers...
+set the DNS servers...
 ````
 echo nameserver 8.8.8.8 > /etc/resolv.conf
 ````
-
-#### FIND YOUR IP CONFIG INFO USING....
+FIND YOUR IP CONFIG INFO USING....
 ````
 sudo /sbin/ifconfig
 ````
-#### Show Running Processes
+Show Running Processes
 ````
 ps ax
 ````
-
-#### HOSTS SAVED IN
+HOSTS SAVED IN
 ````
 /etc/hosts
 ````
-
-### ALL YOUR SOURCES FOR DEB PACKAGES ARE STORED IN...
+ALL YOUR SOURCES FOR DEB PACKAGES ARE STORED IN...
 ````
 /etc/apt/sources.list
 ````
@@ -59,25 +56,24 @@ wget -O /lib/systemd/system/vncserver@.service https://raw.githubusercontent.com
 # Install some additional packages:
 apt install aptitude curl cmake build-essential mailutils python-dev python-pip libusb-1.0-0-dev python-numpy htop ftp locate screen kismet pure-ftpd tigervnc-standalone-server tmux default-mysql-server darkstat ntopng mana-toolkit beef-xss resolvconf mitmf dnsmasq hostapd
 
-## If you have a 16GB sd card or larger and want to have kali in all it’s glory, get yourself a coffee and install the full kali suite (Note: 16GB is very tight, better to use 32GB. Run ## df -h to make sure you didn’t forget to extend your file system earlier 😉 ):
-apt install kali-linux-full
+    apt install kali-linux-full
 
-# The installation might hang during the wvdial setup. It can happen whilst sitting on “setting up wvdial”. Just kill the “wvdialconf” process and follow this guide.
 # If not, install only the metasploit edition:
-apt install metasploit-framework
+    apt install metasploit-framework
 
 # Disable autostart of MySQL (we’d rather start it manually when needed):
-systemctl disable mysql
+    systemctl disable mysql
 
-# House keeping items:
-# Update locate db:
+# House keeping items: Update locate db:
 updatedb
 
 # Setup OpenVAS:
 apt-get install openvas
 openvas-setup
 mkdir -p /etc/systemd/system/greenbone-security-assistant.service.d/
+
 # allow web access to gsa by creating the file “/etc/systemd/system/greenbone-security-assistant.service.d/local.conf” with this content
+
 [Service]
 ExecStart=
 ExecStart=/usr/sbin/gsad --foreground --listen=0.0.0.0 --port=9392 --mlisten=127.0.0.1 --mport=9390
@@ -91,34 +87,6 @@ history -c
 ncsource=wlan1
 logprefix=/home/ftp/pi/kismet
 
-# This makes wlan1 the default capture device and all log files are being written to the ftp directory for easy remote retrieval (skip this if you are not installing the ftp server below).
-# Use a kismet compatible USB dongle like the TP-Link TL-WN722N.
-# To make thinks more predictable, you might want to assign wlan1 to your dongle permanently, e.g. via adding the following to “/etc/udev/rules.d/70-persistent-net.rules”:
-# USB device 0x:0x (ath9k_htc)
-SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="wlan*", NAME="wlan1"
-Speed up booting without eth0 by adding to “/etc/dhcp/dhclient.conf”:
-timeout 10;
-
-
-
-# HELPER CMDs //USEFUL APPS
-## APPS
-
-### SCREEN
-list all screens
-````bash
-screen -list
-````
-Start a new Screen session
-````bash
-screen
-````
-Once inside the session, everything will be preserved â€” even if you close the terminal window or shut down your computer.
-
-***The -r argument can be used to reconnect to a running Screen session.***
-````bash
-screen -r SESSION-NAME-HERE
-````
 
 ## OTHER APT APPS OF NOTE....
 
@@ -129,9 +97,26 @@ CCZE
 
 shellcheck - checks shellcode for errors
 doublecmd
+````
+INSTALL NODE / NPM
 
+````
+sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+````
+OTHERS
+````
+gettext-doc autopoint libasprintf-dev libgettextpo-dev binutils-multiarch libtext-template-perl mkchromecast gplaycli
 
- gettext-doc autopoint libasprintf-dev libgettextpo-dev binutils-multiarch libtext-template-perl mkchromecast gplaycli
 pidgon
-FIND YOUR IP CONFIG INFO USING....
-sudo /sbin/ifconfig
+ ## Homebrew for Linux open your terminal application and paste in the command: 
+```` 
+ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+ 
+  Follow the instructions in the terminal to complete the installation process.
+Once Linuxbrew is installed, you’ll need add the following 3 lines to your .bashrc or .zshrc file:
+
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
+
